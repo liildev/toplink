@@ -71,7 +71,7 @@ export default function Reset() {
           className="w-full bg-violet-800 text-white px-8 py-3 rounded-xl"
           onClick={handleSubmit}
         >
-          O'gartirish
+          O'zgartirish
         </button>
 
         <div className="flex items-center justify-between mt-4">
