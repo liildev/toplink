@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import { forgot } from "../http";
 import { toast } from "react-hot-toast";
 import Input from "../components/UI/Input";
+import Loader from "../components/UI/Loader";
 
 export default function Forget() {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setLoading(true);
       let data = await forgot(email);
 
       if (data) {
@@ -24,6 +27,8 @@ export default function Forget() {
         duration: 3000,
         position: "bottom-center",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,12 +45,13 @@ export default function Forget() {
           title="Elektron pochta"
           onChange={(e) => setEmail(e.target.value)}
         />
-
+        
         <button
+          disabled={loading}
           className="w-full bg-violet-800 text-white px-8 py-3 rounded-xl"
           onClick={handleSubmit}
         >
-          O'zgartirish
+          {loading ? <Loader /> : "O'zgartirish"}
         </button>
 
         <div className="flex items-center justify-between mt-4">

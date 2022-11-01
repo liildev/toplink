@@ -13,23 +13,27 @@ export default function App() {
   const { isAuth, setIsAuth } = useContext(MainContext);
 
   useEffect(() => {
-    if(localStorage.getItem('token')){
-      setIsAuth(true)
+    if (localStorage.getItem("token")) {
+      setIsAuth(true);
     }
   }, []);
-  
+
   return (
     <>
       <Header />
       <Routes>
         {isAuth ? (
-          <Route path="/" element={<Home />} />
+          <>
+            <Route path="/" element={<Home />} index />
+            <Route path="*" element={<Home />} />
+          </>
         ) : (
           <>
-            <Route path="/sign-in" element={<Auth />} />
+            <Route path="/sign-in" element={<Auth />} index />
             <Route path="/sign-up" element={<Auth />} />
             <Route path="/forgot" element={<Forgot />} />
             <Route path="/reset/:id/:token" element={<Reset />} />
+            <Route path="*" element={<Auth />} />
           </>
         )}
       </Routes>

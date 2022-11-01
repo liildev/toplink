@@ -5,12 +5,14 @@ import { login, registration } from "../http";
 import { toast } from "react-hot-toast";
 import Input from "../components/UI/Input";
 import { LOGIN_ROUTE } from "../constants";
+import Loader from "../components/UI/Loader";
 
 export default function Auth() {
   const location = useLocation();
   const navigate = useNavigate();
 
   const { setUser, setIsAuth } = useContext(MainContext);
+  const [loading, setLoading] = useState(false);
   const isSignIn = location.pathname === LOGIN_ROUTE;
 
   const formInitialDetails = {
@@ -32,17 +34,18 @@ export default function Auth() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
+      setLoading(true);
       let data;
       if (isSignIn) {
         data = await login(formDetails.email, formDetails.password);
       } else {
         data = await registration(formDetails);
       }
+      
       setUser(data);
-      setIsAuth(true);
       setFormDetails(formInitialDetails);
+      setIsAuth(true);
 
       toast.success(`You are successfully signed ${isSignIn ? "in" : "up"}`, {
         duration: 3000,
@@ -55,6 +58,8 @@ export default function Auth() {
         duration: 3000,
         position: "bottom-center",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -134,10 +139,17 @@ export default function Auth() {
         )}
 
         <button
+          disabled={loading}
           className="w-full bg-violet-800 text-white px-8 py-3 rounded-xl"
           onClick={handleSubmit}
         >
-          {isSignIn ? "Kirish" : "Ro‘yxatdan o‘tish"}
+          {loading ? (
+            <Loader />
+          ) : isSignIn ? (
+            "Kirish"
+          ) : (
+            "Ro‘yxatdan o‘tish"
+          )}
         </button>
 
         <div className="flex items-center justify-between mt-4">

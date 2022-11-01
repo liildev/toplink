@@ -3,11 +3,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { reset } from "../http";
 import { toast } from "react-hot-toast";
 import Input from "../components/UI/Input";
+import Loader from "../components/UI/Loader";
 
 export default function Reset() {
   const { id, token } = useParams();
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState({ psw: "", confirmpsw: "" });
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ export default function Reset() {
       }
 
       if (password.psw === password.confirmpsw) {
+        setLoading(true)
         let data = await reset(password.confirmpsw, id, token);
 
         if (data) {
@@ -41,6 +44,8 @@ export default function Reset() {
         duration: 3000,
         position: "bottom-center",
       });
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -68,10 +73,11 @@ export default function Reset() {
         />
 
         <button
+          disabled={loading}
           className="w-full bg-violet-800 text-white px-8 py-3 rounded-xl"
           onClick={handleSubmit}
         >
-          O'zgartirish
+          {loading ? <Loader /> : "Tasdiqlash"}
         </button>
 
         <div className="flex items-center justify-between mt-4">
