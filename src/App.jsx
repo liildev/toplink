@@ -29,7 +29,7 @@ export default function App() {
           </>
         ) : (
           <>
-            <Route path="/sign-in" element={<Auth />} index />
+            <Route path="/sign-in" element={<Auth />} />
             <Route path="/sign-up" element={<Auth />} />
             <Route path="/forgot" element={<Forgot />} />
             <Route path="/reset/:id/:token" element={<Reset />} />

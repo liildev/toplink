@@ -7,7 +7,7 @@ export default function Home() {
   const { user } = useContext(MainContext);
 
   return (
-    <div className="flex items-center justify-center mt-20">
+    <div className="flex items-center justify-center pt-32">
       <div className="shadow-xl rounded-md px-10 py-10 flex items-center justify-between w-[400px]">
         <User />
 

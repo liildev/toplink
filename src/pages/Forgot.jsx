@@ -33,7 +33,7 @@ export default function Forget() {
   };
 
   return (
-    <section className="w-full h-[70vh] flex items-center justify-center">
+    <section className="w-full h-[70vh] pt-32  flex items-center justify-center">
       <form className="flex flex-col">
         <h1 className="text-4xl font-body text-violet-800 mb-10">
           Parolni o'zgartirish

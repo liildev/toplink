@@ -5,8 +5,8 @@ import { MainContext } from "../context";
 import Button from "./UI/Button";
 
 export default function Header() {
-  const { isAuth, setUser, setIsAuth } = useContext(MainContext);
   const navigate = useNavigate()
+  const { isAuth, setUser, setIsAuth } = useContext(MainContext);
   
   const signOut = () => {
     localStorage.removeItem("token");
@@ -16,7 +16,7 @@ export default function Header() {
   };
 
   return (
-    <div className="w-full bg-[#e8e9f1] py-4 px-10 flex items-center">
+    <div className="w-full bg-[#e8e9f1] fixed z-20 py-4 px-10 flex items-center">
       <Link to={"/"} className="text-2xl font-bold text-violet-800   flex-1">
         Toplink
       </Link>

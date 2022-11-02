@@ -16,11 +16,11 @@ export default function Auth() {
   const isSignIn = location.pathname === LOGIN_ROUTE;
 
   const formInitialDetails = {
-    firstName: "",
+    fullName: "",
     username: "",
     email: "",
     password: "",
-    phone: "",
+    number: "+998",
   };
 
   const [formDetails, setFormDetails] = useState(formInitialDetails);
@@ -42,7 +42,7 @@ export default function Auth() {
       } else {
         data = await registration(formDetails);
       }
-      
+
       setUser(data);
       setFormDetails(formInitialDetails);
       setIsAuth(true);
@@ -64,7 +64,7 @@ export default function Auth() {
   };
 
   return (
-    <section className="w-full h-[90vh] flex items-center justify-center">
+    <section className="w-full h-[90vh] pt-32 flex items-center justify-center">
       <form className="flex flex-col">
         <h1 className="text-4xl font-body text-violet-800">
           {isSignIn ? "Kirish" : "Ro‘yxatdan o‘tish"}
@@ -101,7 +101,7 @@ export default function Auth() {
                 onChange={(e) => onFormUpdate("fullName", e.target.value)}
               />
               <Input
-                type="number"
+                type="tel"
                 placeholder="+998"
                 title="Telefon nomer"
                 onChange={(e) => onFormUpdate("number", e.target.value)}
@@ -143,15 +143,9 @@ export default function Auth() {
           className="w-full bg-violet-800 text-white px-8 py-3 rounded-xl"
           onClick={handleSubmit}
         >
-          {loading ? (
-            <Loader />
-          ) : isSignIn ? (
-            "Kirish"
-          ) : (
-            "Ro‘yxatdan o‘tish"
-          )}
+          {loading ? <Loader /> : isSignIn ? "Kirish" : "Ro‘yxatdan o‘tish"}
         </button>
-
+        
         <div className="flex items-center justify-between mt-4">
           <p className="text-sm">
             {isSignIn
