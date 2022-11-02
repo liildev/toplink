@@ -1,8 +1,8 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-// const url = "https://top-link-app.herokuapp.com/api/";
-const url = "http://localhost:6699/api/";
+const url = "https://top-link-app.herokuapp.com/api/";
+// const url = "http://localhost:6699/api/";
 
 export const registration = async (formDetails) => {
   const { data } = await axios.post(`${url}auth/registration`, formDetails);
